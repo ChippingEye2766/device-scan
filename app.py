@@ -1,6 +1,5 @@
 from flask import Flask, request, make_response, send_from_directory, render_template
 import requests
-import sys
 
 app = Flask(__name__)
 
@@ -14,7 +13,9 @@ def shodan_search():
 
 def getData(ip):
     BASE_URL = "https://api.shodan.io/shodan/host/"
-    API_KEY = "ra0YVoJCdgNub7GrDplR3XtLxAR13huj"
+    
+    # Replace with api key
+    API_KEY = "XXXX"
     resp = requests.get(url=BASE_URL + ip + "?key=" + API_KEY)
     data = resp.json()
     printed = []
