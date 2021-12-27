@@ -1,5 +1,6 @@
 from flask import Flask, request, make_response, send_from_directory, render_template
 import requests
+from iot import getDataNmap
 
 app = Flask(__name__)
 
@@ -15,7 +16,7 @@ def getData(ip):
     BASE_URL = "https://api.shodan.io/shodan/host/"
     
     # Replace with api key
-    API_KEY = "XXXX"
+    API_KEY = "ra0YVoJCdgNub7GrDplR3XtLxAR13huj"
     resp = requests.get(url=BASE_URL + ip + "?key=" + API_KEY)
     data = resp.json()
     printed = []
@@ -47,8 +48,10 @@ def getData(ip):
     return output
 
 
-
-    
+@app.route("/api/nmap/scan",methods = ['GET', 'POST'])
+def nmap_search():
+    ip = request.args.get("ip")
+    return getDataNmap(ip)
 
 
 if __name__ == '__main__':
